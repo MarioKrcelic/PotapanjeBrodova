@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PotapljanjeBrodova;
+using PotapanjeBrodova;
 
 namespace Test
 {
@@ -19,13 +16,27 @@ namespace Test
         }
 
         [TestMethod]
-        public void Polje_ZaDvaPoljaKojaImajuIsteKoordinateMetodaEqualsVracaTrue()
+        public void Polje_ZaDvaPoljaKojaImajuIsteKoordinateMetodaEqualsVraćaTrue()
         {
             Polje p1 = new Polje(2, 3);
             Polje p2 = new Polje(2, 3);
-            Assert.AreEqual(2, p2.Redak);
-            Assert.AreEqual(3, p2.Stupac);
+            Assert.IsTrue(p1.Equals(p2));
+        }
 
+        [TestMethod]
+        public void Polje_ZaDvaPoljaKojaNemajuIstiRedakMetodaEqualsVraćaFalse()
+        {
+            Polje p1 = new Polje(2, 3);
+            Polje p2 = new Polje(1, 3);
+            Assert.IsFalse(p1.Equals(p2));
+        }
+
+        [TestMethod]
+        public void Polje_ZaDvaPoljaKojaNemajuIstiStupacMetodaEqualsVraćaFalse()
+        {
+            Polje p1 = new Polje(2, 3);
+            Polje p2 = new Polje(2, 4);
+            Assert.IsFalse(p1.Equals(p2));
         }
     }
 }

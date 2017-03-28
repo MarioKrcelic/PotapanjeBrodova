@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PotapljanjeBrodova
+namespace PotapanjeBrodova
 {
     public class Polje : IEquatable<Polje>
     {
-
         public Polje(int redak, int stupac)
         {
             Redak = redak;
