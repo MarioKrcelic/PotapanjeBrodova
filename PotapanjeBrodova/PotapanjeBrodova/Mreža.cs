@@ -15,9 +15,7 @@ namespace PotapanjeBrodova
             for (int r = 0; r < redaka; ++r)
             {
                 for (int s = 0; s < stupaca; ++s)
-                {
                     polja[r, s] = new Polje(r, s);
-                }
             }
         }
 
@@ -33,7 +31,6 @@ namespace PotapanjeBrodova
                 }
             }
             return p;
-
         }
 
         public void UkloniPolje(int redak, int stupac)
@@ -45,15 +42,16 @@ namespace PotapanjeBrodova
         {
             polja[p.Redak, p.Stupac] = null;
         }
+
         public IEnumerable<IEnumerable<Polje>> DajNizoveSlobodnihPolja(int duljinaNiza)
         {
             List<IEnumerable<Polje>> nizovi = new List<IEnumerable<Polje>>();
             foreach (IEnumerable<Polje> niz in DajSlobodnaPolja())
             {
-                if (niz.Count() == duljinaNiza) { }
-
+                if (niz.Count() == duljinaNiza)
+                    nizovi.Add(niz);
             }
-            throw new NotImplementedException();
+            return nizovi;
         }
 
         private Polje[,] polja;
