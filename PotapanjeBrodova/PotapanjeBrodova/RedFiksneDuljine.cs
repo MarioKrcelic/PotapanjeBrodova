@@ -16,10 +16,9 @@ namespace PotapanjeBrodova
         {
             base.Enqueue(element);
             while (Count > maksimalnaDuljina)
-            {
                 Dequeue();
-            }
         }
+
 
         private int maksimalnaDuljina;
     }
