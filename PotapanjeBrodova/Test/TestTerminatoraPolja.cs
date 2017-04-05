@@ -7,16 +7,16 @@ using System.Collections.Generic;
 namespace Test
 {
     [TestClass]
-    public class TestTerminatoraPolja
+    public class TestTerminatorPolja
     {
         private Mreža mreža;
-        private TerminatoraPolja terminator;
+        private TerminatorPolja terminator;
 
         [TestInitialize()]
         public void PripremiMrežuTerminatora()
         {
             mreža = new Mreža(10,10);
-            terminator = new TerminatoraPolja(mreža);
+            terminator = new TerminatorPolja(mreža);
         }
 
         [TestMethod]
