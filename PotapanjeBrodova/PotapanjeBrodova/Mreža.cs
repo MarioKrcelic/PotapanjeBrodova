@@ -95,7 +95,8 @@ namespace PotapanjeBrodova
 
 
         private Polje[,] polja;
-        private int redaka;
-        private int stupaca;
+
+        public readonly int redaka;
+        public readonly int stupaca;
     }
 }
