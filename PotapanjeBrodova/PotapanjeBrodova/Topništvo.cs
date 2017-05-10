@@ -57,16 +57,23 @@ namespace PotapanjeBrodova
        void PromijeniTaktikuUKružnu()
         {
             TaktikaGađanja = TaktikaGađanja.Kružno;
+
+            Polje pogođeno = pucač.PogođenaPolja.First();
+            pucač = new KružniPucač(mreža, pogođeno, duljineBrodova.First());
         }
 
         void PromijeniTaktikuULinijsku()
         {
             TaktikaGađanja = TaktikaGađanja.Linijsko;
+            var pogođeno = pucač.PogođenaPolja;
+            pucač = new LinijskiPucač(mreža, pogođeno, duljineBrodova.First());
         }
 
         void PromijeniTaktikuUNasumično()
         {
             TaktikaGađanja = TaktikaGađanja.Nasumično;
+            var pogođeno = pucač.PogođenaPolja;
+            pucač = new SlučajniPucač(mreža, duljineBrodova.First());
         }
 
 
