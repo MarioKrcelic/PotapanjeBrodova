@@ -27,8 +27,8 @@ namespace PotapanjeBrodova
 
         public void ObradiGađanje(RezultatGađanja rezultat)
         {
-            if (rezultat == RezultatGađanja.Promašaj) return;
-
+            if (rezultat == RezultatGađanja.Promašaj)
+                return;
             if(rezultat == RezultatGađanja.Pogodak)
             {
                 switch(TaktikaGađanja)
@@ -72,7 +72,6 @@ namespace PotapanjeBrodova
         void PromijeniTaktikuUNasumično()
         {
             TaktikaGađanja = TaktikaGađanja.Nasumično;
-            var pogođeno = pucač.PogođenaPolja;
             pucač = new SlučajniPucač(mreža, duljineBrodova.First());
         }
 

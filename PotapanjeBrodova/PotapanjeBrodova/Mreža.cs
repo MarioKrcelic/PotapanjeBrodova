@@ -78,8 +78,8 @@ namespace PotapanjeBrodova
             for(int s = polje.Stupac+1; s<stupaca; ++s)
             {
                 if(polja[polje.Redak, s] == null)
-
                     break;
+
                 rez.Add(polja[polje.Redak, s]);
             }
 
@@ -91,8 +91,7 @@ namespace PotapanjeBrodova
             List<Polje> rez = new List<Polje>();
             for (int r = polje.Redak + 1; r < redaka; ++r)
             {
-                if (polja[polje.Stupac, r] == null)
-
+                if (polja[r, polje.Stupac] == null)
                     break;
                 rez.Add(polja[r,polje.Stupac]);
             }
@@ -106,7 +105,6 @@ namespace PotapanjeBrodova
             for (int s = polje.Stupac - 1; s >= 0; --s)
             {
                 if (polja[polje.Redak, s] == null)
-
                     break;
                 rez.Add(polja[polje.Redak, s]);
             }
@@ -119,7 +117,7 @@ namespace PotapanjeBrodova
             List<Polje> rez = new List<Polje>();
             for (int r = polje.Redak - 1; r >=0 ; --r)
             {
-                if (polja[polje.Stupac, r] == null)
+                if (polja[r, polje.Stupac] == null)
 
                     break;
                 rez.Add(polja[r, polje.Stupac]);

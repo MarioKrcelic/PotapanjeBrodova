@@ -12,10 +12,11 @@ namespace Test
         [TestMethod]
         public void Brodograditelj_SložiFlotuVraćaFlotuSBrodovimaZadaneDuljine()
         {
-            Brodograditelj b = new Brodograditelj();
-            Mreža mreža = new Mreža(10, 10);
+            Brodograditelj brodograditelj = new Brodograditelj();
+            int brojRedaka = 10;
+            int brojStupaca = 10;
             IEnumerable<int> duljineBrodova = new int[] { 5, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
-            Flota f = b.SložiFlotu(mreža, duljineBrodova);
+            Flota f = brodograditelj.SložiFlotu(brojRedaka, brojStupaca, duljineBrodova);
             Assert.AreEqual(duljineBrodova.Count(), f.BrojBrodova);
             Assert.AreEqual(1, f.Brodovi.Count(brod => brod.Polja.Count() == 5));
             Assert.AreEqual(2, f.Brodovi.Count(brod => brod.Polja.Count() == 4));

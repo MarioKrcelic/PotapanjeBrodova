@@ -12,7 +12,7 @@ namespace PotapanjeBrodova
         Pogodak,
         Potopljen
     }
-    interface IGađani
+    public interface IGađani
     {
 
         RezultatGađanja Gađaj(Polje polje);
