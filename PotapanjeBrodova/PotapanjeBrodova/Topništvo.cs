@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PotapanjeBrodova;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -91,6 +92,6 @@ namespace PotapanjeBrodova
 
         private Mreža mreža;
         private List<int> duljineBrodova;
-        private IPucač pucač;
+        private Ipucač pucač;
     }
 }

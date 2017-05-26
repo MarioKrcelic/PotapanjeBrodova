@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PotapanjeBrodova;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace PotapanjeBrodova
 {
-    public class SlučajniPucač : Pucač, IPucač
+    public class SlučajniPucač : Pucač, Ipucač
     {
         public SlučajniPucač(Mreža mreža, int duljinaBroda) 
             : base(mreža, duljinaBroda)
