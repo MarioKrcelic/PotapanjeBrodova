@@ -65,9 +65,9 @@ namespace Test
         public void Brod_GađajVraćaPotopljenZaDrugoGađanjePotopljenogBroda()
         {
             Brod brod = new Brod(new Polje[] { new Polje(1, 1), new Polje(1, 2), new Polje(1, 3) });
-            //brod.Gađaj(new Polje(1, 1));
             brod.Gađaj(new Polje(1, 2));
             brod.Gađaj(new Polje(1, 3));
+            brod.Gađaj(new Polje(1, 1));
             RezultatGađanja rez = brod.Gađaj(new Polje(1, 1));
             Assert.AreEqual(RezultatGađanja.Potopljen, rez);
         }
