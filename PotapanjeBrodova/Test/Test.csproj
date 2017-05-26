@@ -59,6 +59,7 @@
     <Compile Include="TestBrodograditelja.cs" />
     <Compile Include="TestFlote.cs" />
     <Compile Include="TestKružnogPucača.cs" />
+    <Compile Include="TestLinijskogPucača.cs" />
     <Compile Include="TestMreže.cs" />
     <Compile Include="TestPolja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="TestSortiranjaPolja.cs" />
     <Compile Include="TestTerminatoraPolja.cs" />
     <Compile Include="TestTopništva.cs" />
+    <Compile Include="TestIzlučivanjaNajčešćih.cs" />
+    <Compile Include="TestSelektivnogSlučajnogPucača.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PotapanjeBrodova\PotapanjeBrodova.csproj">

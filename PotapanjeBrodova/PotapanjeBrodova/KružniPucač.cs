@@ -1,60 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace PotapanjeBrodova
 {
-    public class KružniPucač : Ipucač
+    public class KružniPucač : Pucač, IPucač
     {
-
         public KružniPucač(Mreža mreža, Polje pogođeno, int duljinaBroda)
+            : base(mreža, pogođeno, duljinaBroda)
         {
-            this.mreža = mreža;
-            this.prvoPogođenoPolje = pogođeno;
-            this.duljinaBroda = duljinaBroda;
-
+            nizoviPoljaUNastavku = DajNizovePoljaUNastavcima();
         }
 
-        public IEnumerable<Polje> PogođenaPolja
+        public override Polje Gađaj()
         {
-            get
-            {
-                return (new Polje[] { prvoPogođenoPolje, gađanoPolje }).Sortiraj();
-            }
-        }
-
-        public Polje Gađaj()
-        {
-            List<Polje> kandidati = DajKandidate();
-            gađanoPolje = kandidati[izbornik.Next(kandidati.Count)];
+            int indeks = izbornik.Next(nizoviPoljaUNastavku.Count);
+            gađanoPolje = nizoviPoljaUNastavku[indeks].First();
+            // uklanjamo odabrani smjer za eventualno sljedeće gađanje
+            nizoviPoljaUNastavku.RemoveAt(indeks);
             return gađanoPolje;
         }
 
-        public void ObradiGađanje(RezultatGađanja rezultat)
+        private List<IEnumerable<Polje>> DajNizovePoljaUNastavcima()
         {
-            
-        }
-
-
-        private List<Polje> DajKandidate()
-        {
-            List<Polje> kandidati = new List<Polje>();
-            foreach(Smjer smjer in Enum.GetValues(typeof(Smjer)))
+            Debug.Assert(PogođenaPolja.Count() == 1);
+            List<IEnumerable<Polje>> kandidati = new List<IEnumerable<Polje>>();
+            foreach (Smjer smjer in Enum.GetValues(typeof(Smjer)))
             {
-                var lista = mreža.DajNizSlobodnihPolja(prvoPogođenoPolje,smjer);
-                if (lista.Count() > 0)
-                    kandidati.Add(lista.ElementAt(0));
+                var niz = mreža.DajNizSlobodnihPolja(PogođenaPolja.ElementAt(0), smjer);
+                if (niz.Count() > 0)
+                    kandidati.Add(niz);
             }
             Debug.Assert(kandidati.Count() > 0);
             return kandidati;
         }
 
-        private Mreža mreža;
-        private Polje prvoPogođenoPolje;
-        private Polje gađanoPolje;
-        private int duljinaBroda;
-        private Random izbornik = new Random();
+        private List<IEnumerable<Polje>> nizoviPoljaUNastavku;
     }
 }

@@ -1,21 +1,19 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace PotapanjeBrodova
 {
-    public class SlučajniPucač : Ipucač
+    public class SlučajniPucač : Pucač, IPucač
     {
-        public SlučajniPucač(Mreža mreža, int duljinaBroda)
+        public SlučajniPucač(Mreža mreža, int duljinaBroda) 
+            : base(mreža, duljinaBroda)
         {
-            this.mreža = mreža;
-            this.duljinaBroda = duljinaBroda;
-
         }
 
-        public Polje Gađaj()
+        public override Polje Gađaj()
         {
             var kandidati = DajKandidate();
             Debug.Assert(kandidati.Count > 0);
@@ -23,27 +21,9 @@ namespace PotapanjeBrodova
             return gađanoPolje;
         }
 
-        public void ObradiGađanje(RezultatGađanja rezultat)
-        {
-            
-        }
-
-        private List<Polje> DajKandidate()
+        protected virtual List<Polje> DajKandidate()
         {
             return mreža.DajNizoveSlobodnihPolja(duljinaBroda).SelectMany(niz => niz).ToList();
-        }
-
-        private Mreža mreža;
-        private int duljinaBroda;
-        private Polje gađanoPolje;
-        private Random izbornik = new Random();
-
-        public IEnumerable<Polje> PogođenaPolja
-        {
-            get
-            {
-                return new Polje[] { gađanoPolje };
-            }
         }
     }
 }

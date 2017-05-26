@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace PotapanjeBrodova
 {
-
     public enum Smjer
     {
         Desno,
@@ -19,8 +18,8 @@ namespace PotapanjeBrodova
     {
         public Mreža(int redaka, int stupaca)
         {
-            this.redaka = redaka;
-            this.stupaca = stupaca;
+            Redaka = redaka;
+            Stupaca = stupaca;
             polja = new Polje[redaka, stupaca];
             for (int r = 0; r < redaka; ++r)
             {
@@ -32,9 +31,9 @@ namespace PotapanjeBrodova
         public IEnumerable<Polje> DajSlobodnaPolja()
         {
             List<Polje> p = new List<Polje>();
-            for (int r = 0; r < redaka; ++r)
+            for (int r = 0; r < Redaka; ++r)
             {
-                for (int s = 0; s < stupaca; ++s)
+                for (int s = 0; s < Stupaca; ++s)
                 {
                     if (polja[r, s] != null)
                         p.Add(polja[r, s]);
@@ -54,76 +53,65 @@ namespace PotapanjeBrodova
             {
                 case Smjer.Desno:
                     return DajSlobodnaPoljaDesno(polje);
-
                 case Smjer.Dolje:
                     return DajSlobodnaPoljaDolje(polje);
-
                 case Smjer.Lijevo:
                     return DajSlobodnaPoljaLijevo(polje);
-
                 case Smjer.Gore:
                     return DajSlobodnaPoljaGore(polje);
-
                 default:
                     Debug.Assert(false);
                     break;
             }
-
             return new List<Polje>();
         }
 
         private IEnumerable<Polje> DajSlobodnaPoljaDesno(Polje polje)
         {
-            List<Polje> rez = new List<Polje>();
-            for(int s = polje.Stupac+1; s<stupaca; ++s)
+            List<Polje> rezultat = new List<Polje>();
+            for (int s = polje.Stupac + 1; s < Stupaca; ++s)
             {
-                if(polja[polje.Redak, s] == null)
+                if (polja[polje.Redak, s] == null)
                     break;
-
-                rez.Add(polja[polje.Redak, s]);
+                rezultat.Add(polja[polje.Redak, s]);
             }
-
-            return rez;
+            return rezultat;
         }
 
         private IEnumerable<Polje> DajSlobodnaPoljaDolje(Polje polje)
         {
-            List<Polje> rez = new List<Polje>();
-            for (int r = polje.Redak + 1; r < redaka; ++r)
+            List<Polje> rezultat = new List<Polje>();
+            for (int r = polje.Redak + 1; r < Redaka; ++r)
             {
                 if (polja[r, polje.Stupac] == null)
                     break;
-                rez.Add(polja[r,polje.Stupac]);
+                rezultat.Add(polja[r, polje.Stupac]);
             }
-
-            return rez;
+            return rezultat;
         }
 
         private IEnumerable<Polje> DajSlobodnaPoljaLijevo(Polje polje)
         {
-            List<Polje> rez = new List<Polje>();
+            List<Polje> rezultat = new List<Polje>();
             for (int s = polje.Stupac - 1; s >= 0; --s)
             {
                 if (polja[polje.Redak, s] == null)
                     break;
-                rez.Add(polja[polje.Redak, s]);
+                rezultat.Add(polja[polje.Redak, s]);
             }
-
-            return rez;
+            return rezultat;
         }
 
         private IEnumerable<Polje> DajSlobodnaPoljaGore(Polje polje)
         {
-            List<Polje> rez = new List<Polje>();
-            for (int r = polje.Redak - 1; r >=0 ; --r)
+            List<Polje> rezultat = new List<Polje>();
+            for (int r = polje.Redak - 1; r >= 0; --r)
             {
                 if (polja[r, polje.Stupac] == null)
-
                     break;
-                rez.Add(polja[r, polje.Stupac]);
+                rezultat.Add(polja[r, polje.Stupac]);
             }
-
-            return rez;
+            return rezultat;
         }
 
         public void UkloniPolje(Polje p)
@@ -138,26 +126,21 @@ namespace PotapanjeBrodova
             return nizovi;
         }
 
-
-
         IEnumerable<int> DajNizBrojeva(int maxVrijednost)
         {
-            for (int i =0; i<maxVrijednost;++i)
-            {
+            for (int i = 0; i < maxVrijednost; ++i)
                 yield return i;
-            }
         }
 
-        private List<IEnumerable<Polje>> DajNizSlobodnihPolja(int duljinaNiza, IEnumerable<int> vanjskiIndeks,IEnumerable<int> nutarnjiIndeks, Func<int,int,Polje> dohvatPolja)
-        { 
-
+        private List<IEnumerable<Polje>> DajNizoveSlobodnihPolja(int duljinaNiza, IEnumerable<int> vanjskiIndeks, IEnumerable<int> nutarnjiIndeks, Func<int, int, Polje> dohvatPolja)
+        {
             List<IEnumerable<Polje>> nizovi = new List<IEnumerable<Polje>>();
             foreach (int i in vanjskiIndeks)
             {
                 RedFiksneDuljine<Polje> red = new RedFiksneDuljine<Polje>(duljinaNiza);
                 foreach (int j in nutarnjiIndeks)
                 {
-                    Polje polje = dohvatPolja(i,j);
+                    Polje polje = dohvatPolja(i, j);
                     if (polje == null)
                         red.Clear();
                     else
@@ -173,18 +156,17 @@ namespace PotapanjeBrodova
 
         private List<IEnumerable<Polje>> DajNizoveSlobodnihPoljaUHorizontalnomSmjeru(int duljinaNiza)
         {
-            return DajNizSlobodnihPolja(duljinaNiza, DajNizBrojeva(redaka), DajNizBrojeva(stupaca),(i,j)=>polja[i,j]);
+            return DajNizoveSlobodnihPolja(duljinaNiza, DajNizBrojeva(Redaka), DajNizBrojeva(Stupaca), (i, j) => polja[i, j]);
         }
 
         private List<IEnumerable<Polje>> DajNizoveSlobodnihPoljaUVertikalnomSmjeru(int duljinaNiza)
         {
-            return DajNizSlobodnihPolja(duljinaNiza, DajNizBrojeva(stupaca), DajNizBrojeva(redaka), (i, j) => polja[j, i]);
+            return DajNizoveSlobodnihPolja(duljinaNiza, DajNizBrojeva(Stupaca), DajNizBrojeva(Redaka), (i, j) => polja[j, i]);
         }
-
 
         private Polje[,] polja;
 
-        public readonly int redaka;
-        public readonly int stupaca;
+        public readonly int Redaka;
+        public readonly int Stupaca;
     }
 }
